@@ -1,76 +1,37 @@
 package liste;
 
-public class SList {
-
-	/**
-	 * IntSList il = new IntSList()		// null
-	 * il.isNull() : boolean			// null?
-	 * il.car()    : int				// car
-	 * il.cdr()	   : IntSList			// cdr
-	 * il.cons(n)  : IntSList			// cons
-	 * 
-	 * il.length()   : int				// length
-	 * il.listRef(i) : int				// list-ref
-	 * il.equals(cl) : boolean			// equal?
-	 * il.append(ql) : IntSList			// append
-	 * il.reverse()  : IntSList			// reverse
-	 * 
-	 */
-	
-	/* Esempi:
-	 * 
-	 * ( new IntSList() ).cons(5)	-->  (5)
-	 * 
-	 * oppure:
-	 * 	IntSList il = new IntSList();
-	 * il = il.cons(5);
-	 * 
-	 * il  -->  (5)
-	 * il = il.isNull()  -->  false
-	 * 
-	 * il = il.cons(4)
-	 * il  -->  (4 5)
-	 * 
-	 */
-	
-	/*
-	 * final rende il valore della variabile immutabile, 
-	 * riferisce al tempo di esecuzione e non al tempo di compilazione
-	 * ovvero nel nostro caso quando verranno create nuove liste
-	 */
-	
-	public static final SList NULL_INTLIST = new SList();	// lista vuota definita come costante
+public class SList<T> {
 	
 	private final boolean empty; 
-	private final int first;
-	private final SList rest;
+	private final T first;
+	private final SList<T> rest;
 	
 	public SList() {
 		empty = true;
-		first = 0;	// irrilevante
+		first = null;
 		rest = null;
 	}	// constructor IntSList empty
 	
-	public SList(int f, SList r) {
+	public SList(T e, SList<T> il) {
 		empty = false;
-		first = f;
-		rest = r;
+		first = e;
+		rest = il;
 	}	// constructor IntSList not empty
 	
 	public boolean isNull() {
 		return empty;
 	}	// method isNull
 	
-	public int car() {
+	public T car() {
 		return first;
 	}	// method car
 	
-	public SList cdr() {
+	public SList<T> cdr() {
 		return rest;
 	}	// method cdr
 	
-	public SList cons(int n) {
-		return (new SList(n, this));
+	public SList<T> cons(T e) {
+		return new SList<T>(e, this);
 	}	// method cons
 	
 	public int length() {
@@ -81,7 +42,7 @@ public class SList {
 		}
 	}	// method length
 	
-	public int listRef(int i) {
+	public T listRef(int i) {
 		if (i == 0) {
 			return car();
 		} else {
@@ -89,36 +50,36 @@ public class SList {
 		}
 	}	// method listRef
 	
-	public boolean equals(SList cl) {
+	public boolean equals(SList<T> il) {
 		if (isNull()) {
-			return cl.isNull();
-		} else if (cl.isNull()) {
+			return il.isNull();
+		} else if (il.isNull()) {
 			return false;	// so che la prima lista non è vuota
-		} else if (car() == cl.car()) {
-			return cdr().equals(cl.cdr());	// effettuo i controlli al resto delle liste
+		} else if (car() == il.car()) {
+			return cdr().equals(il.cdr());	// effettuo i controlli al resto delle liste
 		} else {
 			return false;
 		}
 	}	// method equals
 	
-	public SList append(SList ql) {
+	public SList<T> append(SList<T> il) {
 		if (isNull()) {
-			return ql;
+			return il;
 		} else {
-			return cdr().append(ql).cons(car());
+			return cdr().append(il).cons(car());
 		}
 	}	// method append
 	
-	public SList reverse() {
-		return reverseRec(NULL_INTLIST);
+	public SList<T> reverse() {
+		return reverseRec(new SList<T>());
 	}	// method reverse
 	
 	// uso private xk è un metodo aggiuntivo per la funzionalità del reverse, non fa parte del protocollo
-	private SList reverseRec(SList rl) {
+	private SList<T> reverseRec(SList<T> re) {
 		if (isNull()) {
-			return rl;
+			return re;
 		} else {
-			return cdr().reverseRec(rl.cons(car()));
+			return cdr().reverseRec(re.cons(car()));
 		}
 	}	// method reverseRec
 	
@@ -129,7 +90,7 @@ public class SList {
 			return "(" + first + ")";
 		} else {
 			String rep = "(" + first;
-			SList r = rest;
+			SList<T> r = rest;
 			while (!r.isNull()) {
 				rep = rep + ", " + r.car();
 		        r = r.cdr();
