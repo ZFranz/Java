@@ -2,89 +2,90 @@ package liste;
 
 public class StringSList {
 
-    public static final StringSList NULL_STRINGLIST = new StringSList();	// lista vuota definita come costante
-	
-	private final boolean empty; 
+	public static final StringSList NULL_STRINGLIST = new StringSList(); // lista vuota definita come costante
+
+	private final boolean empty;
 	private final String first;
 	private final StringSList rest;
-	
+
 	public StringSList() {
 		empty = true;
-		first = "";	// irrilevante
+		first = ""; // irrilevante
 		rest = null;
-	}	// constructor StringSList empty
-	
+	} // constructor StringSList empty
+
 	public StringSList(String e, StringSList sl) {
 		empty = false;
 		first = e;
 		rest = sl;
-	}	// constructor IntSList not empty
-	
+	} // constructor IntSList not empty
+
 	public boolean isNull() {
 		return empty;
-	}	// method isNull
-	
+	} // method isNull
+
 	public String car() {
 		return first;
-	}	// method car
-	
+	} // method car
+
 	public StringSList cdr() {
 		return rest;
-	}	// method cdr
-	
+	} // method cdr
+
 	public StringSList cons(String e) {
 		return (new StringSList(e, this));
-	}	// method cons
-	
+	} // method cons
+
 	public int length() {
 		if (isNull()) {
 			return 0;
 		} else {
 			return (1 + cdr().length());
 		}
-	}	// method length
-	
+	} // method length
+
 	public String listRef(int i) {
 		if (i == 0) {
 			return car();
 		} else {
-			return cdr().listRef(i-1);
+			return cdr().listRef(i - 1);
 		}
-	}	// method listRef
-	
+	} // method listRef
+
 	public boolean equals(StringSList sl) {
 		if (isNull()) {
 			return sl.isNull();
 		} else if (sl.isNull()) {
-			return false;	// so che la prima lista non è vuota
+			return false; // so che la prima lista non è vuota
 		} else if (car() == sl.car()) {
-			return cdr().equals(sl.cdr());	// effettuo i controlli al resto delle liste
+			return cdr().equals(sl.cdr()); // effettuo i controlli al resto delle liste
 		} else {
 			return false;
 		}
-	}	// method equals
-	
+	} // method equals
+
 	public StringSList append(StringSList sl) {
 		if (isNull()) {
 			return sl;
 		} else {
 			return cdr().append(sl).cons(car());
 		}
-	}	// method append
-	
+	} // method append
+
 	public StringSList reverse() {
 		return reverseRec(NULL_STRINGLIST);
-	}	// method reverse
-	
-	// uso private xk è un metodo aggiuntivo per la funzionalità del reverse, non fa parte del protocollo
+	} // method reverse
+
+	// uso private xk è un metodo aggiuntivo per la funzionalità del reverse, non fa
+	// parte del protocollo
 	private StringSList reverseRec(StringSList rl) {
 		if (isNull()) {
 			return rl;
 		} else {
 			return cdr().reverseRec(rl.cons(car()));
 		}
-	}	// method reverseRec
-	
+	} // method reverseRec
+
 	public String toString() {
 		if (empty) {
 			return "()";
@@ -95,10 +96,10 @@ public class StringSList {
 			StringSList r = rest;
 			while (!r.isNull()) {
 				rep = rep + "\", \"" + r.car();
-		        r = r.cdr();
+				r = r.cdr();
 			}
 			return (rep + "\")");
 		}
-	}	// method toString
-	
-}
+	} // method toString
+
+} // class StringSList

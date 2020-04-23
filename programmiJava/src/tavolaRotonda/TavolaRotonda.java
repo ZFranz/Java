@@ -3,7 +3,7 @@ package tavolaRotonda;
 import liste.IntSList;
 
 public class TavolaRotonda {
-
+	
 	/**
 	 * 
 	 * Costruttori per creare "nuove" situazioni
@@ -25,40 +25,40 @@ public class TavolaRotonda {
 	 * 
 	 * @param args
 	 */
-	
+
 	private final IntSList cavalieri;
-	
-	public TavolaRotonda(int n) {  // n > 0
+
+	public TavolaRotonda(int n) { // n > 0
 		cavalieri = range(1, n);
-	}	// constructor TavolaRotonda
-	
+	} // constructor TavolaRotonda
+
 	private TavolaRotonda(IntSList cav) {
 		cavalieri = cav;
-	}	// constructor TavolaRotonda
-	
+	} // constructor TavolaRotonda
+
 	public int numeroDiCavalieri() {
 		return cavalieri.length();
-	}	// method numeroDiCavalieri
-	
+	} // method numeroDiCavalieri
+
 	public int cavConLaBrocca() {
 		return cavalieri.car();
-	}	// method cavConLaBrocca
-	
+	} // method cavConLaBrocca
+
 	public TavolaRotonda dopoUscitaCav() {
 		IntSList listaDiUnElemento = IntSList.NULL_INTLIST.cons(cavalieri.car());
 		IntSList listaCon2ElementiInMeno = cavalieri.cdr().cdr();
-		
+
 		IntSList nuovaLista = listaCon2ElementiInMeno.append(listaDiUnElemento);
-		
+
 		return new TavolaRotonda(nuovaLista);
-	}	// method dopoUscitaCav
-	
+	} // method dopoUscitaCav
+
 	private static IntSList range(int m, int n) {
 		if (m > n) {
 			return IntSList.NULL_INTLIST;
 		} else {
 			return range(m + 1, n).cons(m);
 		}
-	}	//method range
+	} // method range
 
-}	// class TavolaRotonda
+} // class TavolaRotonda

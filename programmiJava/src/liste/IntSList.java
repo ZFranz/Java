@@ -1,7 +1,7 @@
 package liste;
 
 public class IntSList {
-
+	
 	/**
 	 * IntSList il = new IntSList()		// null
 	 * il.isNull() : boolean			// null?
@@ -38,90 +38,91 @@ public class IntSList {
 	 * riferisce al tempo di esecuzione e non al tempo di compilazione
 	 * ovvero nel nostro caso quando verranno create nuove liste
 	 */
-	
-	public static final IntSList NULL_INTLIST = new IntSList();	// lista vuota definita come costante
-	
-	private final boolean empty; 
+
+	public static final IntSList NULL_INTLIST = new IntSList(); // lista vuota definita come costante
+
+	private final boolean empty;
 	private final int first;
 	private final IntSList rest;
-	
+
 	public IntSList() {
 		empty = true;
-		first = 0;	// irrilevante
+		first = 0; // irrilevante
 		rest = null;
-	}	// constructor IntSList empty
-	
+	} // constructor IntSList empty
+
 	public IntSList(int f, IntSList r) {
 		empty = false;
 		first = f;
 		rest = r;
-	}	// constructor IntSList not empty
-	
+	} // constructor IntSList not empty
+
 	public boolean isNull() {
 		return empty;
-	}	// method isNull
-	
+	} // method isNull
+
 	public int car() {
 		return first;
-	}	// method car
-	
+	} // method car
+
 	public IntSList cdr() {
 		return rest;
-	}	// method cdr
-	
+	} // method cdr
+
 	public IntSList cons(int n) {
 		return (new IntSList(n, this));
-	}	// method cons
-	
+	} // method cons
+
 	public int length() {
 		if (isNull()) {
 			return 0;
 		} else {
 			return (1 + cdr().length());
 		}
-	}	// method length
-	
+	} // method length
+
 	public int listRef(int i) {
 		if (i == 0) {
 			return car();
 		} else {
-			return cdr().listRef(i-1);
+			return cdr().listRef(i - 1);
 		}
-	}	// method listRef
-	
+	} // method listRef
+
 	public boolean equals(IntSList cl) {
 		if (isNull()) {
 			return cl.isNull();
 		} else if (cl.isNull()) {
-			return false;	// so che la prima lista non è vuota
+			return false; // so che la prima lista non è vuota
 		} else if (car() == cl.car()) {
-			return cdr().equals(cl.cdr());	// effettuo i controlli al resto delle liste
+			return cdr().equals(cl.cdr()); // effettuo i controlli al resto delle liste
 		} else {
 			return false;
 		}
-	}	// method equals
-	
+	} // method equals
+
 	public IntSList append(IntSList ql) {
 		if (isNull()) {
 			return ql;
 		} else {
 			return cdr().append(ql).cons(car());
 		}
-	}	// method append
-	
+	} // method append
+
 	public IntSList reverse() {
 		return reverseRec(NULL_INTLIST);
-	}	// method reverse
-	
-	// uso private xk è un metodo aggiuntivo per la funzionalità del reverse, non fa parte del protocollo
+	} // method reverse
+
+	// uso private xk è un metodo aggiuntivo per la funzionalità del reverse, non fa
+	// parte del protocollo
 	private IntSList reverseRec(IntSList rl) {
 		if (isNull()) {
 			return rl;
 		} else {
 			return cdr().reverseRec(rl.cons(car()));
 		}
-	}	// method reverseRec
-	
+	} // method reverseRec
+
 	public String toString() {
 		if (empty) {
 			return "()";
@@ -132,10 +133,10 @@ public class IntSList {
 			IntSList r = rest;
 			while (!r.isNull()) {
 				rep = rep + ", " + r.car();
-		        r = r.cdr();
+				r = r.cdr();
 			}
 			return (rep + ")");
 		}
-	}	// method toString
+	} // method toString
 
-}	// class IntSList
+} // class IntSList

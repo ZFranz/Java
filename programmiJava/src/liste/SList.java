@@ -1,102 +1,103 @@
 package liste;
 
 public class SList<T> {
-	
-	private final boolean empty; 
+
+	private final boolean empty;
 	private final T first;
 	private final SList<T> rest;
-	
+
 	public SList() {
 		empty = true;
 		first = null;
 		rest = null;
-	}	// constructor IntSList empty
-	
+	} // constructor IntSList empty
+
 	public SList(T e, SList<T> il) {
 		empty = false;
 		first = e;
 		rest = il;
-	}	// constructor IntSList not empty
-	
+	} // constructor IntSList not empty
+
 	public boolean isNull() {
 		return empty;
-	}	// method isNull
-	
+	} // method isNull
+
 	public T car() {
 		return first;
-	}	// method car
-	
+	} // method car
+
 	public SList<T> cdr() {
 		return rest;
-	}	// method cdr
-	
+	} // method cdr
+
 	public SList<T> cons(T e) {
 		return new SList<T>(e, this);
-	}	// method cons
-	
+	} // method cons
+
 	public int length() {
-		if ( isNull() ) {
+		if (isNull()) {
 			return 0;
 		} else {
-			return ( 1 + cdr().length() );
+			return (1 + cdr().length());
 		}
-	}	// method length
-	
+	} // method length
+
 	public T listRef(int i) {
-		if ( i == 0 ) {
+		if (i == 0) {
 			return car();
 		} else {
-			return cdr().listRef( i-1 );
+			return cdr().listRef(i - 1);
 		}
-	}	// method listRef
-	
+	} // method listRef
+
 	public boolean equals(SList<T> il) {
-		if ( isNull() ) {
+		if (isNull()) {
 			return il.isNull();
-		} else if ( il.isNull() ) {
-			return false;	// so che la prima lista non è vuota
-		} else if ( car() == il.car() ) {
-			return cdr().equals( il.cdr() );	// effettuo i controlli al resto delle liste
+		} else if (il.isNull()) {
+			return false; // so che la prima lista non è vuota
+		} else if (car() == il.car()) {
+			return cdr().equals(il.cdr()); // effettuo i controlli al resto delle liste
 		} else {
 			return false;
 		}
-	}	// method equals
-	
+	} // method equals
+
 	public SList<T> append(SList<T> il) {
-		if ( isNull() ) {
+		if (isNull()) {
 			return il;
 		} else {
-			return cdr().append(il).cons( car() );
+			return cdr().append(il).cons(car());
 		}
-	}	// method append
-	
+	} // method append
+
 	public SList<T> reverse() {
-		return reverseRec( new SList<T>() );
-	}	// method reverse
-	
-	// uso private xk è un metodo aggiuntivo per la funzionalità del reverse, non fa parte del protocollo
+		return reverseRec(new SList<T>());
+	} // method reverse
+
+	// uso private xk è un metodo aggiuntivo per la funzionalità del reverse, non fa
+	// parte del protocollo
 	private SList<T> reverseRec(SList<T> re) {
-		if ( isNull() ) {
+		if (isNull()) {
 			return re;
 		} else {
-			return cdr().reverseRec( re.cons( car() ) );
+			return cdr().reverseRec(re.cons(car()));
 		}
-	}	// method reverseRec
-	
+	} // method reverseRec
+
 	public String toString() {
-		if ( empty ) {
+		if (empty) {
 			return "()";
-		} else if ( rest.isNull() ) {
+		} else if (rest.isNull()) {
 			return "(" + first + ")";
 		} else {
 			String rep = "(" + first;
 			SList<T> r = rest;
-			while ( !r.isNull() ) {
+			while (!r.isNull()) {
 				rep = rep + ", " + r.car();
-		        r = r.cdr();
+				r = r.cdr();
 			}
-			return ( rep + ")" );
+			return (rep + ")");
 		}
-	}	// method toString
+	} // method toString
 
-}	// class IntSList
+} // class SList<T>
