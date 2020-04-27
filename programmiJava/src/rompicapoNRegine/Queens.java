@@ -15,19 +15,11 @@ public class Queens {
 		return numeroDiCompletamenti(new Board(n));
 	} // method numeroDiSoluzioni
 
-	public static StringSList listaDiSoluzioni2(int n) {
-		return listaDiCompletamenti2(new Board(n));
+	public static StringSList listaDiSoluzioni(int n) {
+		return listaDiCompletamenti(new Board(n));
 	} // method listaDiSoluzioni2
 
-	public static BoardSList listaDiSoluzioni(int n) {
-		BoardSList bl = new BoardSList();
-
-		bl = bl.cons(listaDiCompletamenti(new Board(n)));
-
-		return bl;
-	} // method listaDiSoluzioni
-
-	public static StringSList listaDiCompletamenti2(Board b) {
+	public static StringSList listaDiCompletamenti(Board b) {
 		int n = b.size();
 		int q = b.queensOn();
 
@@ -39,7 +31,7 @@ public class Queens {
 
 			for (int j = 1; j <= n; j++) {
 				if (!b.underAttack(i, j)) {
-					sl = sl.append(listaDiCompletamenti2(b.addQueen(i, j)));
+					sl = sl.append(listaDiCompletamenti(b.addQueen(i, j)));
 				}
 			}
 			return sl;
@@ -47,29 +39,7 @@ public class Queens {
 
 	} // method listaDiCompletamenti
 
-	public static Board listaDiCompletamenti(Board b) {
-		int n = b.size();
-		int q = b.queensOn();
-
-		if (q == n) {
-			return b;
-		} else {
-			int i = q + 1;
-
-			for (int j = 1; j <= n; j++) {
-				if (!b.underAttack(i, j)) {
-					// i++;
-					b = listaDiCompletamenti(b.addQueen(i, j));
-					System.out.println("numero regine: " + b.queensOn());
-					System.out.println("config: " + b.arrangement());
-				}
-			}
-
-			return b;
-		}
-	} // method listaDiCompletamenti
-
-	public static int numeroDiCompletamenti2(Board b) {
+	public static int numeroDiCompletamenti(Board b) {
 		int n = b.size();
 		int q = b.queensOn();
 
@@ -87,24 +57,7 @@ public class Queens {
 			return count;
 		}
 
-	} // method listaDiCompletamenti
-
-	public static int numeroDiCompletamenti(Board b) {
-		int n = b.size();
-		int q = b.queensOn();
-		int count = 0;
-		int i = q;
-
-		for (int j = 0; j < n; j++) {
-			if (!b.underAttack(i, j)) {
-				i = q + 1;
-				count++;
-				b.addQueen(i, j);
-			}
-		}
-		return count;
-
-	} // method listaDiCompletamenti
+	} // method numeroDiCompletamenti
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
