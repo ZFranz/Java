@@ -2,23 +2,9 @@ package rompicapoNRegine;
 
 import liste.IntSList;
 
-/**
- * Protocollo della classe "Board":
- * 
- * Board b = new Board(n);
- * 
- * b.size()				: int
- * b.queensOn()			: int
- * b.underAttack(i,j)	: boolean
- * b.arrangement()		: String
- * 
- * b.addQueen(i,j)		: Board
- * 
- */
-
 public class Board_IntSList {
 
-	private static final IntSList NULL_INDEXLIST = IntSList.NULL_INTLIST;	
+	private static final IntSList NULL_INDEXLIST = IntSList.NULL_INTLIST;
 	private static final String ROWS = " 123456789ABCDEF";
 	private static final String COLS = " abcdefghijklmno";
 
@@ -67,15 +53,10 @@ public class Board_IntSList {
 	} // method arrangement
 
 	public Board_IntSList addQueen(int i, int j) {
-		return new Board_IntSList(size, queens + 1,
-				rws.cons(i),
-				cls.cons(j),
-				dg1.cons(i-j),
-				dg2.cons(i+j),
-				config + " " + COLS.substring(j, j + 1) + ROWS.substring(i, i + 1) + " ",
-				i, j);
+		return new Board_IntSList(size, queens + 1, rws.cons(i), cls.cons(j), dg1.cons(i - j), dg2.cons(i + j),
+				config + " " + COLS.substring(j, j + 1) + ROWS.substring(i, i + 1) + " ", i, j);
 	} // method addQueen
-	
+
 	public String toString() {
 		return "[" + config + "]";
 	}
