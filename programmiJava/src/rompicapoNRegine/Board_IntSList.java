@@ -1,6 +1,6 @@
 package rompicapoNRegine;
 
-import java.util.function.*;
+import liste.IntSList;
 
 /**
  * Protocollo della classe "Board":
@@ -18,27 +18,37 @@ import java.util.function.*;
 
 public class Board_IntSList {
 
+	private static final IntSList NULL_INDEXLIST = IntSList.NULL_INTLIST;	
 	private static final String ROWS = " 123456789ABCDEF";
 	private static final String COLS = " abcdefghijklmno";
 
 	private final int size;
 	private final int queens;
-	private final BiPredicate<Integer, Integer> attack; // predicato per vedere se una regina è minacciata
+	private final IntSList rws;
+	private final IntSList cls;
+	private final IntSList dg1;
+	private final IntSList dg2;
 	private final String config; // configurazione, disposizione delle regine
 
 	public Board_IntSList(int n) {
 		size = n;
 		queens = 0;
-		attack = (x, y) -> false; // (lambda (x y) false)
+		rws = NULL_INDEXLIST;
+		cls = NULL_INDEXLIST;
+		dg1 = NULL_INDEXLIST;
+		dg2 = NULL_INDEXLIST;
 		config = "";
-	} // constructor Board vuoto
+	} // constructor Board_IntSList vuoto
 
-	private Board_IntSList(int n, int q, BiPredicate<Integer, Integer> p, String c) {
+	private Board_IntSList(int n, int q, IntSList rs, IntSList cs, IntSList dg1s, IntSList dg2s, String c) {
 		size = n;
 		queens = q;
-		attack = p; // (lambda (x y) false)
+		rws = rs;
+		cls = cs;
+		dg1 = dg1s;
+		dg2 = dg2s;
 		config = c;
-	} // constructor Board non vuoto
+	} // constructor Board_IntSList non vuoto
 
 	public int size() { // dimensione della scacchiera
 		return size;
@@ -58,8 +68,16 @@ public class Board_IntSList {
 
 	public Board_IntSList addQueen(int i, int j) {
 		return new Board_IntSList(size, queens + 1,
-				(x, y) -> ((x == i) || (y == j) || (x - y == i - j) || (x + y == i + j) || attack.test(x, y)),
-				config + " " + COLS.substring(j, j + 1) + ROWS.substring(i, i + 1) + " ");
+				rws.cons(i),
+				cls.cons(j),
+				dg1.cons(i-j),
+				dg2.cons(i+j),
+				config + " " + COLS.substring(j, j + 1) + ROWS.substring(i, i + 1) + " ",
+				i, j);
 	} // method addQueen
+	
+	public String toString() {
+		return "[" + config + "]";
+	}
 
-} // class Board
+} // class Board_IntSList
