@@ -154,12 +154,12 @@ public class ProgrammazioneDinamica {
 	private static String better(String u, String v) {
 		int m = u.length();
 		int n = v.length();
-		
+
 		if (m < n) {
 			return v;
-		} else if(n < m) {
+		} else if (n < m) {
 			return u;
-		} else if((Math.random() * 2) == 0) {
+		} else if ((Math.random() * 2) == 0) {
 			return v;
 		} else {
 			return u;
@@ -258,8 +258,8 @@ public class ProgrammazioneDinamica {
 	} // method test2
 
 	public static void test3() {
-		String s1 = "atrio";
-		String s2 = "arto";
+		String s1 = "arto";
+		String s2 = "atrio";
 		System.out.println("llcs tra \"" + s1 + "\" e \"" + s2 + "\": " + llcsv2(s1, s2));
 	} // method test3
 	
@@ -271,7 +271,7 @@ public class ProgrammazioneDinamica {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		test4();
+		test3();
 	} // method main
 
 } // class ProgrammazioneDinamica
