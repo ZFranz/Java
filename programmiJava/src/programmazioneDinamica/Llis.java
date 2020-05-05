@@ -33,6 +33,18 @@ public class Llis {
 		}
 	} // method llisRec
 
+	
+	public static int llisMem(int[] s) {
+		int n = s.length;
+		int[][] h = new int[n+1][n+1];
+		
+		for (int i = 0; i <= n; i++) {
+			for (int j = 0; j <= n; j++) {
+				h[i][j] = UNKNOWN;
+			}
+		}
+		return llisMemRec(s, 0, 0, h);
+	}
 	/**
 	 * 
 	 * @param s - Vector
@@ -40,37 +52,27 @@ public class Llis {
 	 * 
 	 *         s[i] > 0 per i in [0,n-1], dove n = s.length
 	 */
-	public static int llisMem(int[] s) {
-		int n = s.length;
-
-		int[][] h = new int[1][n];
-		for (int x = 0; x < n; x++) {
-			h[0][x] = s[x];
-		}
-
-		return llisMemRec(n, 0, 0, h);
-	} // llisMem
-
-	public static int llisMemRec(int n, int i, int j, int[][] h) {
+	public static int llisMemRec(int[] s, int i, int j, int[][] h) {
+		final int n = s.length;
+		int[] p = new int [n + 1];
+		int t = p[j];
 
 		if (i == n) {
-			return 0;
-		} else if (h[0][i] <= h[0][j]) {
-			return llisMemRec(n, i + 1, j, h);
-		} else if (h[0][i] > h[0][j]) {
-			return 1 + llisMemRec(n, i + 1, i, h);
+			h[i][j] = 0;
+		} else if (s[i] <= t) {
+			h[i][j] = llisMemRec(s, i + 1, j, h);
 		} else {
-			return Math.max(1 + llisMemRec(n, i + 1, h[0][i], h), llisMemRec(n, i + 1, h[0][j], h));
+			h[i][j] = Math.max(1 + llisMemRec(s, i + 1, s[i], h), llisMemRec(s, i + 1, t, h));
 		}
 
-	} // llisMemRec
+		return h[i][j];
+	} // llisMem
 
 	/**
 	 * 
 	 * @param args
 	 */
 	public static void main(String args[]) {
-		llisMem(new int[] { 5, 4, 3, 2, 1 });
 		System.out.println(llisMem(new int[] { 47, 38, 39, 25, 44 }));
 
 		System.out.println(llis(new int[] { 5, 4, 3, 2, 1 }));

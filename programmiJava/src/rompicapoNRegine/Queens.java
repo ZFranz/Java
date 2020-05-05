@@ -17,6 +17,14 @@ public class Queens {
 
 	public static StringSList listaDiSoluzioni(int n) {
 		return listaDiCompletamenti(new Board(n));
+	} // method listaDiSoluzioni
+	
+	public static int numeroDiSoluzioniv2(int n) {
+		return numeroDiCompletamentiv2(new Board2(n));
+	} // method numeroDiSoluzioni
+
+	public static StringSList listaDiSoluzioniv2(int n) {
+		return listaDiCompletamentiv2(new Board2(n));
 	} // method listaDiSoluzioni2
 
 	public static StringSList listaDiCompletamenti(Board b) {
@@ -58,10 +66,55 @@ public class Queens {
 		}
 
 	} // method numeroDiCompletamenti
+	
+	public static StringSList listaDiCompletamentiv2(Board2 b) {
+		int n = b.size();
+		int q = b.queensOn();
+
+		if (q == n) {
+			return (StringSList.NULL_STRINGLIST).cons(b.arrangement());
+		} else { // q < n
+			int i = q + 1;
+			StringSList sl = StringSList.NULL_STRINGLIST;
+
+			for (int j = 1; j <= n; j++) {
+				if (!b.underAttack(i, j)) {
+					b.addQueen(i, j);
+					sl = sl.append(listaDiCompletamentiv2(b));
+					b.removeQueen(i,  j);
+				}
+			}
+			return sl;
+		}
+
+	} // method listaDiCompletamentiv2
+	
+	public static int numeroDiCompletamentiv2(Board2 b) {
+		int n = b.size();
+		int q = b.queensOn();
+
+		if (q == n) {
+			return 1;
+		} else { // q < n
+			int i = q + 1;
+			int count = 0;
+
+			for (int j = 1; j <= n; j++) {
+				if (!b.underAttack(i, j)) {
+					b.addQueen(i, j);
+					count = count + numeroDiCompletamentiv2(b);
+					b.removeQueen(i, j);
+				}
+			}
+			return count;
+		}
+
+	} // method numeroDiCompletamentiv2
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Numero di soluzioni: " + listaDiSoluzioni(4));
+		System.out.println("Numero di soluzioni: " + numeroDiSoluzioniv2(8));
+		System.out.println("Numero di soluzioni: " + listaDiSoluzioniv2(4));
 	} // method main
 
 } // class Queens

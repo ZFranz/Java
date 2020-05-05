@@ -31,6 +31,16 @@ public class GiuseppeFlavio {
 		}
 		return tr.cavConLaBrocca();
 	} // method ultimo3
+	
+	public static int ultimo4(int n) {
+
+		TavolaRotondav4 tr = new TavolaRotondav4(n);
+
+		while (tr.numeroDiCavalieri() > 1) {
+			tr.dopoUscitaCav();
+		}
+		return tr.cavConLaBrocca();
+	} // method ultimo3
 
 	public static int test(int n, int repeats) { // usa TavolaRotonda
 		int j = 0;
@@ -78,8 +88,9 @@ public class GiuseppeFlavio {
 	} // method test3
 
 	public static void main(String args[]) {
-		System.out.println("Cavaliere n° " + test(10000, 100) + "\n");
-		System.out.println("Cavaliere n° " + test2(10000, 100) + "\n");
-		System.out.println("Cavaliere n° " + test3(10000, 100) + "\n");
+		//System.out.println("Cavaliere n° " + test(10000, 100) + "\n");
+		//System.out.println("Cavaliere n° " + test2(10000, 100) + "\n");
+		//System.out.println("Cavaliere n° " + test3(10000, 100) + "\n");
+		System.out.println(ultimo4(8));
 	}
 } // class GiuseppeFlavio
