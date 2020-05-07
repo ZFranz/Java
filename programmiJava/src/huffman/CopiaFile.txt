@@ -1,0 +1,41 @@
+package huffman;
+
+import huffman_toolkit.*;
+
+public class IOExamples {
+
+	/**
+	 * 
+	 * @param src - String, nome del file di input
+	 * @param dst - String, nome del file di output
+	 * @return
+	 */
+	public static int copyFile(String src, String dst) {
+		// ----- creo e apro i file di input e output
+		InputTextFile in = new InputTextFile(src);
+		OutputTextFile out = new OutputTextFile(dst);
+		int count = 0;
+
+		// ----- finché ho del testo leggo e copio riga per riga
+		while (in.textAvailable()) {
+			String line = in.readTextLine();
+			out.writeTextLine(line);
+			count++;
+		}
+
+		// ----- chiudo i file di input e output
+		in.close();
+		out.close();
+
+		// ----- restituisco il numero di righe copiate
+		return count;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String src = "src/huffman/IOExamples.java";
+		String dst = "src/huffman/CopiaFile.txt";
+		System.out.println("Il file \"" + src + "\" contiene " + copyFile(src, dst) + " righe.");
+	}
+
+} // class IOExamples
