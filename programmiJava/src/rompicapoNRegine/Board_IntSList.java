@@ -45,7 +45,7 @@ public class Board_IntSList {
 	} // method queensOn
 
 	public boolean underAttack(int i, int j) { // controllo se una regina viene attaccata da un'altra regina
-		return attack.test(i, j); // (attack i j)
+		return (rws.equals(i) || cls.equals(j) || dg1.equals(i - j) || dg2.equals(i + j)); // (attack i j)
 	} // method underAttack
 
 	public String arrangement() {
@@ -54,7 +54,7 @@ public class Board_IntSList {
 
 	public Board_IntSList addQueen(int i, int j) {
 		return new Board_IntSList(size, queens + 1, rws.cons(i), cls.cons(j), dg1.cons(i - j), dg2.cons(i + j),
-				config + " " + COLS.substring(j, j + 1) + ROWS.substring(i, i + 1) + " ", i, j);
+				config + " " + COLS.substring(j, j + 1) + ROWS.substring(i, i + 1) + " ");
 	} // method addQueen
 
 	public String toString() {

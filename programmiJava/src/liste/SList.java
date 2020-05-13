@@ -33,6 +33,16 @@ public class SList<T> {
 	public SList<T> cons(T e) {
 		return new SList<T>(e, this);
 	} // method cons
+	
+	public boolean belong(T e) {
+        if (this.isNull()) {
+            return false;
+        } else if (this.car() == e) {
+            return true;
+        } else {
+            return cdr().belong(e);
+        }
+    } // method belong
 
 	public int length() {
 		if (isNull()) {

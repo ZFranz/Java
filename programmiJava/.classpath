@@ -4,5 +4,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Users/zhouf/git/Java/programmiJava/lib/queens.jar"/>
 	<classpathentry kind="lib" path="C:/Users/zhouf/git/Java/programmiJava/lib/huffman_toolkit.jar"/>
+	<classpathentry kind="lib" path="C:/Users/zhouf/git/Java/programmiJava/lib/puzzleboard.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

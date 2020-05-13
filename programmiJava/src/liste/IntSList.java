@@ -73,6 +73,18 @@ public class IntSList {
 		return (new IntSList(n, this));
 	} // method cons
 
+	public boolean belong(int k) {
+		if (this.isNull()) {
+			return false;
+
+		} else if (this.car() == k) {
+			return true;
+
+		} else {
+			return cdr().belong(k);
+		}
+	} // method belong
+
 	public int length() {
 		if (isNull()) {
 			return 0;
@@ -93,7 +105,7 @@ public class IntSList {
 		if (isNull()) {
 			return cl.isNull();
 		} else if (cl.isNull()) {
-			return false; // so che la prima lista non è vuota
+			return false; // so che la prima lista non ï¿½ vuota
 		} else if (car() == cl.car()) {
 			return cdr().equals(cl.cdr()); // effettuo i controlli al resto delle liste
 		} else {
@@ -113,7 +125,7 @@ public class IntSList {
 		return reverseRec(NULL_INTLIST);
 	} // method reverse
 
-	// uso private xk è un metodo aggiuntivo per la funzionalità del reverse, non fa
+	// uso private xk ï¿½ un metodo aggiuntivo per la funzionalitï¿½ del reverse, non fa
 	// parte del protocollo
 	private IntSList reverseRec(IntSList rl) {
 		if (isNull()) {
@@ -122,6 +134,41 @@ public class IntSList {
 			return cdr().reverseRec(rl.cons(car()));
 		}
 	} // method reverseRec
+	
+	public IntSList sortedIns(int n, IntSList il) {
+		if (il.isNull()) {
+			il = il.cons(n);
+		} else if (il.belong(n)) {
+			il = il.cdr().cons(il.car());
+		} else if (n > il.car()) {
+			il = sortedIns(n, il.cdr()).cons(il.car());
+		} else {
+			il = il.cons(n);
+		}
+		return il;
+	} // method sortedIns
+	
+	public IntSList sortedList(IntSList il) {
+		if (il.isNull()) {
+			return il;
+		} else {
+			il = sortedIns(il.car(), sortedList(il.cdr()));
+		}
+		return il;
+	} // method sortedList
+	
+	public IntSList remove(int n, IntSList il) {
+		
+		if (!il.isNull() && il.belong(n)) {
+			if (n != il.car()) {
+				
+				il = remove(n, il.cdr()).cons(il.car());
+			} else {
+				il = new IntSList().append(il.cdr());
+			}
+		}
+		return il;
+	}
 
 	public String toString() {
 		if (empty) {

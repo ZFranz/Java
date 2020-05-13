@@ -38,12 +38,16 @@ public class ListTest {
 		}
 	} // method range1
 
-	public static int test() {
+	public static IntSList test() {
 		IntSList il = new IntSList();
-		il = new IntSList(5, il);
-		il = il.cons(4);
+		//il = new IntSList(5, range(6, 10));
+		il = il.sortedIns(11, il);
+		il = il.sortedIns(1, il);
+		il = il.sortedIns(10, il);
+		il = il.sortedIns(6, il);
 
-		return il.cdr().car();
+		return il;
+		//return il.cdr().car();
 	} // method test
 
 	public static void test1(int m, int n) {
@@ -96,7 +100,7 @@ public class ListTest {
 		 * System.out.println(xl == il);
 		 */
 
-		System.out.println(test2());
+		System.out.println(test());
 	} // method main
 
 } // class ListTest
