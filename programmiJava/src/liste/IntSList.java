@@ -168,7 +168,7 @@ public class IntSList {
 			}
 		}
 		return il;
-	}
+	} // method remove
 
 	public String toString() {
 		if (empty) {

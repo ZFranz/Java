@@ -11,13 +11,11 @@ import puzzleboard.PuzzleBoard;
  */
 public class BoardGUI {
 	private final int size; // dimensione della tavoletta generalizzata al caso n x x
-	private static final int HOLE = 0; // rappresentazione del quadratino vuoto (lacuna)
 	private final int cells; // numero di tasselli nella tavoletta n x n
 	private int[][] board; // matrice n*n
-	private int z_row; // coordinata della riga
-	private int z_col; // coordinata della colonna
+	private int z_row; // coordinata della riga dello 0
+	private int z_col; // coordinata della colonna dello 0
 	private static IntSList list = new IntSList(); // lista con i numeri generati random senza ripetizioni
-	private static IntSList list2 = new IntSList();
 	private static int[] orderedList;
 	private static int r = 0;
 	private static int c = 0;
@@ -35,7 +33,6 @@ public class BoardGUI {
 		cells = n * n;
 		board = new int[n][n];
 		orderedList = new int[cells];
-		// int t = 0;
 
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
@@ -185,15 +182,11 @@ public class BoardGUI {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int pos = 0;
-		gui = new PuzzleBoard(4);
-		BoardGUI b = new BoardGUI(4);
+		gui = new PuzzleBoard(8);
+		BoardGUI b = new BoardGUI(8);
 		System.out.println(b);
 
 		// ----- ordino la lista e la inserisco in un vettore
-
-		list2 = list2.append(list);
-		list2 = list2.reverse();
-		System.out.println(list2.cdr().cdr().car());
 		list = list.sortedList(list);
 		list = list.remove(0, list);
 		list = list.append(new IntSList().cons(0));

@@ -68,10 +68,47 @@ public class Huffman {
 		}
 	} // method fillTable
 
+	public static String flattenTree(Node n) {
+		if (n.isLeaf()) {
+			char c = n.character();
+			if ((c == '@') || (c == '\\')) {
+				return "\\" + c;
+			} else {
+				return "" + c;
+			}
+		} else {
+			return "@" + flattenTree(n.left()) + flattenTree(n.right());
+		}
+	} // method flattenTree
+
+	public static void compress(String src, String dst) {
+		int[] freq = freeHistogram(src);
+		Node root = huffmanTree(freq);
+		String[] codes = codeTable(root);
+
+		int size = root.weight(); // dimensione del file sorgente
+		String ht = flattenTree(root);
+
+		InputTextFile in = new InputTextFile(src);
+		OutputTextFile out = new OutputTextFile(dst);
+
+		out.writeTextLine("" + size);
+		out.writeTextLine(ht);
+		
+		for (int i = 0; i < size; i++) {
+			char c = in.readChar();
+			out.writeCode(codes[c]); 
+		}
+
+		in.close();
+		out.close();
+	} // method compress
+
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		String src = "src/huffman/test.txt";
-		String[] temp = new String[CHARS];
+		String src = "src/huffman/Huffman.java";
+		String dst = "src/huffman/dst.txt";
+		compress(src, dst);
+		/*String[] temp = new String[CHARS];
 		temp = codeTable(huffmanTree(freeHistogram(src)));
 		for (int i = 0; i < temp.length; i++) {
 			if (temp[i] != null) {
@@ -79,6 +116,9 @@ public class Huffman {
 			}
 
 		}
+		System.out.println(flattenTree(huffmanTree(freeHistogram(src))));*/
 	} // method main
+	
+	// (char)((int)(Math.random()*128))
 
 } // class Huffman
