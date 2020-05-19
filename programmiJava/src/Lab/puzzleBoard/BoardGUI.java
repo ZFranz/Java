@@ -1,4 +1,4 @@
-package Lab.PuzzleBoard;
+package Lab.puzzleBoard;
 
 import liste.IntSList;
 import puzzleboard.PuzzleBoard;

@@ -1,4 +1,4 @@
-package Lab.PuzzleBoard;
+package Lab.puzzleBoard;
 
 import liste.IntSList;
 
@@ -10,7 +10,6 @@ import liste.IntSList;
  */
 public class Board {
 	private final int size; // dimensione della tavoletta generalizzata al caso n x x
-	private static final int HOLE = 0; // rappresentazione del quadratino vuoto (lacuna)
 	private final int cells; // numero di tasselli nella tavoletta n x n
 	private int[][] board; // matrice n*n
 	private int z_row; // coordinata della riga
