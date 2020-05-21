@@ -8,7 +8,7 @@ import huffman_toolkit.*;
  * @author zhouf
  *
  */
-public class Huffman {
+public class HuffmanIterativo {
 
 	private static final int CHARS = InputTextFile.CHARS; // numeri di caratteri ASCII da 0 a 127
 
@@ -53,32 +53,49 @@ public class Huffman {
 	public static String[] codeTable(Node root) {
 		String[] codes = new String[CHARS];
 
-		fillTable(root, "", codes);
+		Stack<Frame> stack = new Stack<>();
+		stack.push(new Frame(root, ""));
+
+		while (!stack.empty()) {
+			Frame f = stack.pop();
+			Node n = f.node;
+			String pre = f.pre;
+
+			if (n.isLeaf()) {
+				char c = n.character();
+				codes[c] = pre;
+			} else {
+				stack.push(new Frame(n.right(), pre + "1"));
+				stack.push(new Frame(n.left(), pre + "0"));
+			}
+		}
 
 		return codes;
 	} // method codeTable
 
-	private static void fillTable(Node n, String pre, String[] codes) {
-		if (n.isLeaf()) {
-			char c = n.character();
-			codes[c] = pre;
-		} else {
-			fillTable(n.left(), pre + "0", codes);
-			fillTable(n.right(), pre + "1", codes);
-		}
-	} // method fillTable
+	public static String flattenTree(Node root) {
+		String ht = "";
+		Stack<Node> stack = new Stack<>();
+		stack.push(root);
 
-	public static String flattenTree(Node n) {
-		if (n.isLeaf()) {
-			char c = n.character();
-			if ((c == '@') || (c == '\\')) {
-				return "\\" + c;
+		while (!stack.empty()) {
+			Node n = stack.pop();
+
+			if (n.isLeaf()) {
+				char c = n.character();
+				if ((c == '@') || (c == '\\')) {
+					ht = ht + "\\" + c;
+				} else {
+					ht = ht + c;
+				}
 			} else {
-				return "" + c;
+				ht = ht + "@";
+				stack.push(n.right());
+				stack.push(n.left());
 			}
-		} else {
-			return "@" + flattenTree(n.left()) + flattenTree(n.right());
 		}
+
+		return ht;
 	} // method flattenTree
 
 	public static Node restoreTree(InputTextFile in) { // bisogna vederlo come una variabile di stato
@@ -169,4 +186,4 @@ public class Huffman {
 
 	// (char)((int)(Math.random()*128))
 
-} // class Huffman
+} // class HuffmanIterativo

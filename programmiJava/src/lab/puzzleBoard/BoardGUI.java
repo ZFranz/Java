@@ -1,4 +1,4 @@
-package Lab.puzzleBoard;
+package lab.puzzleBoard;
 
 import liste.IntSList;
 import puzzleboard.PuzzleBoard;
@@ -182,8 +182,8 @@ public class BoardGUI {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int pos = 0;
-		gui = new PuzzleBoard(8);
-		BoardGUI b = new BoardGUI(8);
+		gui = new PuzzleBoard(4);
+		BoardGUI b = new BoardGUI(4);
 		System.out.println(b);
 
 		// ----- ordino la lista e la inserisco in un vettore
