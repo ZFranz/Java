@@ -1,18 +1,15 @@
 package huffman;
 
 /**
- * Node n = new Node(c, w); c:char, w:weight
- * Node p = new Node(l, r);
+ * Node n = new Node(c, w); c:char, w:weight Node p = new Node(l, r);
  * 
  * Node q;
  * 
- * q.isLeaf()    : boolean
+ * q.isLeaf() : boolean
  * 
- * q.character() : char
- * q.weight()    : int
+ * q.character() : char q.weight() : int
  * 
- * q.left()      : Node
- * q.right()     : Node
+ * q.left() : Node q.right() : Node
  * 
  * @author zhouf
  *
@@ -25,17 +22,17 @@ public class Node implements Comparable<Node> {
 	private final Node right;
 
 	public Node(char chr, int wgt) {
-		character = chr;
-		weight = wgt;
+		this.character = chr;
+		this.weight = wgt;
 		left = null;
 		right = null;
 	} // constructor Node
 
 	public Node(Node lft, Node rgt) {
-		character = (char) 0;
-		weight = lft.weight() + rgt.weight();
-		left = lft;
-		right = rgt;
+		this.character = (char) 0;
+		this.weight = lft.weight() + rgt.weight();
+		this.left = lft;
+		this.right = rgt;
 	}
 
 	public boolean isLeaf() {
@@ -67,9 +64,17 @@ public class Node implements Comparable<Node> {
 			return +1; // mi interessa il segno, non il valore
 		}
 	} // method compareTo
-	
+
 	public String toString() {
-		return "weight: " + weight;
-	}
+		if (isLeaf()) {
+			if ((character() == '@') || (character() == '\\')) {
+				return "\\" + character() + ":" + weight();
+			} else {
+				return character() + ":" + weight();
+			}
+		} else {
+			return "@:" + weight();
+		}
+	} // method toString
 
 } // class Node
