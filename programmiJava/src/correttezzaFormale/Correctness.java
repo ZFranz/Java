@@ -185,7 +185,7 @@ public class Correctness {
 	 *  
 	 *  n < (q+1)^2
 	 *  
-	 *  q^2 <= n
+	 *  q^2 <= n	q <= sqrt(n) < q+1
 	 */
 	public static int intSqrt(int n) {	/** Pre:  n>= 0  */
 		int q = 0, x = 0, y = 1, z = n - 1;
