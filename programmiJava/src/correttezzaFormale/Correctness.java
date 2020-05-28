@@ -102,9 +102,108 @@ public class Correctness {
 	 */
 	
 	
+	public static int cube(int n) { /** Pre:  n >= 0  */
+		int x = 0;
+		int y = 0;
+		int u = 1;
+		int v = 6;
+		
+		while (x < n) {				/** Inv:  0 <= x <= n,  y = x^3,
+											  u = 3x^2 + 3x + 1,  v = 6x + 6  */
+									/** Term: ???  */
+			x += 1;
+			y += u;
+			u += v;
+			v += 6;	
+		}
+		return y; 					/** Post: y = n^3  */
+	} // method cube
+	
+	
+	public static int[] fattorizzazione(int n) { /** Pre:  n >= 2  */
+		int[] fattori = new int[n + 1];
+
+		for (int i = 0; i <= n; i++) {
+			fattori[i] = 0;
+		}
+		int x = n;
+		int p = 2;
+
+		while (x > 1) {							/** Inv: 1 <= x <= n,  n = x * Prod (k: [2,n]) k^fattori[k],
+		 												 x non ha fattori < p,  2 <= p <= n
+		 												 term: x + n - p  */
+			if (x % p == 0) {
+				fattori[p] = fattori[p] + 1;
+				x /= p;
+			} else {
+				p++;
+			}
+		}
+		return fattori;							/** Post: n = Prod (k: [2,n]) k^fattori[k]  */
+	} // method fattorizzazione
+	
+	/**
+	 * Inv( {0,0,...,0}, n , 2) :  1 <= n <= n,  n = x * Prod (k: [2,n]) k^0 = n * 1
+	 * 							   n non ha fattori < 2,  2 <= 2 <= n
+	 * 
+	 * (a) p divide x
+	 * 
+	 * 	 ? :  1 <= x/p <= n,
+	 * 		  n = x/p * Prod (k: [2,p-1]) k^fattori[k] * p^(fattori[p]+1) * Prod (k: [p+1,n]) k^fattori[k]
+	 * 		  x/p non ha fattori < p,  2 <= p <= n
+	 * 
+	 * 		  n = x * Prod (k: [2,p-1]) k^fattori[k] * p^(fattori[p]) * Prod (k: [p+1,n]) k^fattori[k]
+	 * 			= x * Prod (k: [2,p]) k^fattori[k]
+	 * 
+	 * (b) ... esercizio
+	 * 		   x non ha fattori < p+1,  2 <= p+1 <= n
+	 * 
+	 * Inv(fattori,x,p) & x <= 1  -->  x = 1  -->  
+	 * 
+	 *   n = 1 * Prod (k: [2,n]) k^fattori[k]
+	 *   
+	 * term: x + n - p >= 0
+	 * 
+	 * (a)  term': x/p + n - p < x + n - p  :term
+	 * 
+	 * (b)  term': x + n - (p+1) = (x + n - p) - 1 < x + n - p  :term
+	 */
+	
+	
+	
+	/** Esercizio 4/A della provetta di accertamento del 25/06/2019
+	 * 
+	 * 	y = 2*0 + 1
+	 * 
+	 *  H = 2q +1
+	 *  
+	 *  2 + K = n
+	 *  
+	 *  q^2 = x > z  (perché sono uscito dal while)
+	 *  
+	 *  n = y+z < 2q + 1 + q^2 = (q+1)^2
+	 *  
+	 *  n < (q+1)^2
+	 *  
+	 *  q^2 <= n
+	 */
+	public static int intSqrt(int n) {	/** Pre:  n>= 0  */
+		int q = 0, x = 0, y = 1, z = n - 1;
+		
+		while (x<=z) {					/** Inv: 0 <= q <= sqrt(n),  x = q^2,  y = 2q + 1,  y + z = n*/
+			
+										/** Term: [sqrt(n)-q]  */
+			q++;
+			x+=y;
+			y+=2;
+			z-=2;
+		}
+		return q;						/** Post: valore restituito: [sqrt(n)]  */
+	} // method intSqrt
+	
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println(lcm(2,5));
+		System.out.println(intSqrt(50));
 	} // method main
 
 } // class Correctness
