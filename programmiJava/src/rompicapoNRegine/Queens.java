@@ -1,6 +1,6 @@
 package rompicapoNRegine;
 
-import liste.StringSList;
+import lab.stringSList.StringSList;
 
 /**
  * Soluzione del rompicapo delle N regine

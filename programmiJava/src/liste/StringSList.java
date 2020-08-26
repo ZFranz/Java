@@ -56,7 +56,7 @@ public class StringSList {
 		if (isNull()) {
 			return sl.isNull();
 		} else if (sl.isNull()) {
-			return false; // so che la prima lista non è vuota
+			return false; // so che la prima lista non ï¿½ vuota
 		} else if (car() == sl.car()) {
 			return cdr().equals(sl.cdr()); // effettuo i controlli al resto delle liste
 		} else {
@@ -76,7 +76,7 @@ public class StringSList {
 		return reverseRec(NULL_STRINGLIST);
 	} // method reverse
 
-	// uso private xk è un metodo aggiuntivo per la funzionalità del reverse, non fa
+	// uso private xk ï¿½ un metodo aggiuntivo per la funzionalitï¿½ del reverse, non fa
 	// parte del protocollo
 	private StringSList reverseRec(StringSList rl) {
 		if (isNull()) {

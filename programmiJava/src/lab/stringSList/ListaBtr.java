@@ -1,4 +1,4 @@
-package liste;
+package lab.stringSList;
 
 import esercitazioniJava.EserctazioniJava;
 

@@ -1,7 +1,5 @@
 package rompicapoNRegine;
 
-import java.util.function.*;
-
 /**
  * Protocollo della classe "Board":
  * 
@@ -24,10 +22,10 @@ public class Board2 {
 
 	private final int size;
 	private int queens;
-	private int[] rowAttack; // mi chiedo se una certa riga è sottoscacco
-	private int[] colAttack; // mi chiedo se una certa colonna è sottoscacco
-	private int[] dg1Attack; // mi chiedo se la diagonale in basso a destra è sottoscacco
-	private int[] dg2Attack; // mi chiedo se la diagonale in alto a destra è sottoscacco
+	private int[] rowAttack; // mi chiedo se una certa riga ï¿½ sottoscacco
+	private int[] colAttack; // mi chiedo se una certa colonna ï¿½ sottoscacco
+	private int[] dg1Attack; // mi chiedo se la diagonale in basso a destra ï¿½ sottoscacco
+	private int[] dg2Attack; // mi chiedo se la diagonale in alto a destra ï¿½ sottoscacco
 	private String config; // configurazione, disposizione delle regine
 
 	public Board2(int n) {

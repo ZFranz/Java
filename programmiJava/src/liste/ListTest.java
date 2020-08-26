@@ -1,5 +1,7 @@
 package liste;
 
+import lab.stringSList.StringSList;
+
 /**
  * Test di oggetti di tipo InsSList
  * 

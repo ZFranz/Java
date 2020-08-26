@@ -12,7 +12,7 @@ public class Huffman {
 
 	private static final int CHARS = InputTextFile.CHARS; // numeri di caratteri ASCII da 0 a 127
 
-	public static int[] freeHistogram(String src) {
+	public static int[] freqHistogram(String src) {
 		int[] freq = new int[CHARS]; // associo il numero dell'array con il corrispettivo nella codifica ASCII
 
 		for (int i = 0; i < CHARS; i++) { // inizializzo l'array
@@ -110,7 +110,7 @@ public class Huffman {
 	} // method restoreChar
 
 	public static void compress(String src, String dst) {
-		int[] freq = freeHistogram(src);
+		int[] freq = freqHistogram(src);
 		Node root = huffmanTree(freq);
 		String[] codes = codeTable(root);
 
